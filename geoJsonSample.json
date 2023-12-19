@@ -1,0 +1,22 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Example Area"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [-100.0, 40.0],
+            [-105.0, 45.0],
+            [-110.0, 40.0],
+            [-100.0, 40.0]
+          ]
+        ]
+      }
+    }
+  ]
+}

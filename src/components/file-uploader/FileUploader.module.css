@@ -1,0 +1,51 @@
+.fileUploaderWrapper {
+  background-color: var(--tertiary-color);
+  margin-block: 1rem;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  padding: 1.5rem;
+  font-size: 0.75rem;
+  color: var(--font-color)
+}
+
+.fileDropArea {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 450px;
+  max-width: 100%;
+  border: 1px rgba(255, 255, 255, 0.4);
+  border-radius: 3px;
+  transition: 0.2s;
+  justify-content: space-between;
+  padding-inline-start: 1rem;
+  width: 100%;
+}
+
+.chooseFileButton {
+  flex-shrink: 0;
+  background-color: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+  padding: .5rem;
+}
+
+.fileMessage {
+  font-size: small;
+  font-weight: 300;
+  line-height: 1.4;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.fileInput {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  cursor: pointer;
+  opacity: 0;
+}

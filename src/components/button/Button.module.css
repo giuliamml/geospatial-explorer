@@ -1,0 +1,17 @@
+.button {
+  background-color: var(--secondary-color);
+  border: 1px solid var(--secondary-color);
+  font-weight: bold;
+}
+
+.button:hover {
+  background-color: var(--secondary-color);
+  border: 1px solid var(--secondary-color);
+  font-weight: bold;
+}
+
+.button:active {
+  background-color: var(--secondary-color);
+  border: 1px solid var(--secondary-color);
+  font-weight: bold;
+}
