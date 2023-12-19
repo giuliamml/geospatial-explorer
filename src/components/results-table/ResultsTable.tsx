@@ -39,17 +39,17 @@ const ResultsTable = ({ data }: PropTypes) => {
     //     renderSpectralBands(params.data.assets),
     //   tooltipField: "spectralBandsTooltip",
     // },
-    {
-      headerName: "Thumbnail",
-      field: "thumbnail",
-      cellRenderer: "linkCellRenderer",
-    },
-    {
-      headerName: "Metadata",
-      field: "metadataLinks",
-      // cellRenderer: (params) => renderMetadataLinks(params.value),
-      cellRenderer: "linkCellRenderer",
-    },
+    // {
+    //   headerName: "Thumbnail",
+    //   field: "thumbnail",
+    //   cellRenderer: "linkCellRenderer",
+    // },
+    // {
+    //   headerName: "Metadata",
+    //   field: "metadataLinks",
+    //   cellRenderer: (params) => renderMetadataLinks(params.value),
+    //   cellRenderer: "linkCellRenderer",
+    // },
   ];
 
   const LinkCellRenderer = ({ value }) => {
@@ -112,8 +112,8 @@ const ResultsTable = ({ data }: PropTypes) => {
     bbox: feature.bbox,
     cloudCoverage: feature.properties["landsat:cloud_cover_land"],
     // spectralBands: feature.assets, // Assuming assets contain spectral bands
-    thumbnail: feature.assets.thumbnail,
-    metadataLinks: feature.assets["MTL.json"],
+    // thumbnail: feature.assets.thumbnail,
+    // metadataLinks: feature.assets["MTL.json"],
   }));
 
   return (
