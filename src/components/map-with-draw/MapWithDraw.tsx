@@ -48,7 +48,7 @@ const MapWithDraw = ({ setBbox, bbox, geoJsonData }: PropTypes) => {
       ref={mapRef}
       center={[51.505, -0.09]}
       zoom={13}
-      style={{ height: "400px" }}
+      style={{ height: "500px" }}
     >
       <TileLayer
         url="https://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}"

@@ -12,7 +12,7 @@ const NavbarComp = () => {
         <Navbar.Brand href="/">
           <img className={styles.logo} src={Logo} alt="Logo" />
         </Navbar.Brand>
-        <Nav className={styles.linksWrapper}>
+        {/* <Nav className={styles.linksWrapper}>
           <NavLink
             to="/"
             className={({ isActive }) =>
@@ -33,7 +33,7 @@ const NavbarComp = () => {
           >
             Analytics
           </NavLink>
-        </Nav>
+        </Nav> */}
       </Container>
     </Navbar>
   );

@@ -63,7 +63,7 @@ const DataExplorer = () => {
   return (
     <Container className={styles.container}>
       <Row>
-        <Col>
+        <Col sm={9}>
           <FileUploader setBbox={setBbox} setGeoJsonData={setGeoJsonData} />
           <MapWithDraw
             setBbox={setBbox}
@@ -71,7 +71,7 @@ const DataExplorer = () => {
             bbox={bbox as Feature["bbox"]}
           />
         </Col>
-        <Col>
+        <Col sm={3}>
           <Form
             handleClick={(event: React.MouseEvent<HTMLButtonElement>) =>
               handleClick(event)
@@ -82,6 +82,7 @@ const DataExplorer = () => {
           {loading && <Loader />}
         </Col>
       </Row>
+
       <div ref={resultsTableRef}>{data && <TabsSection data={data} />}</div>
     </Container>
   );

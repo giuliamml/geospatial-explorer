@@ -1,6 +1,7 @@
 import { Line } from "react-chartjs-2";
 import "chart.js/auto";
 import { Feature, FeatureCollection } from "../../types/types";
+import styles from "./CloudCoverageGraph.module.css";
 
 type PropTypes = {
   data: FeatureCollection;
@@ -25,10 +26,10 @@ const CloudCoverageGraph = ({ data }: PropTypes) => {
   };
 
   return (
-    <>
+    <div className={styles.wrapper}>
       <h2>Temporal Cloud Coverage</h2>
       <Line data={chartData} />
-    </>
+    </div>
   );
 };
 

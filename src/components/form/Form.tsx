@@ -26,7 +26,7 @@ const Form = ({ handleClick, setDates, dates }: PropTypes) => {
   console.log("dates", dates);
 
   return (
-    <Stack gap={3} direction="vertical">
+    <Stack gap={3} direction="vertical" style={{ paddingTop: "5rem" }}>
       <RangeDatePicker
         handleOnChange={handleOnChange}
         startDate={dates[0] ? new Date(dates[0]) : null}

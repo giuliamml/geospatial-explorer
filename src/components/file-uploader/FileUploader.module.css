@@ -1,12 +1,16 @@
 .fileUploaderWrapper {
   background-color: var(--tertiary-color);
-  margin-block: 1rem;
-  border-radius: 10px;
+  /* margin-block: 1rem; */
+  /* border-radius: 10px; */
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
   display: flex;
   align-items: center;
   padding: 1.5rem;
   font-size: 0.75rem;
-  color: var(--font-color)
+  color: var(--font-color);
+  width: 30rem;
+  transform: translateY(5px);
 }
 
 .fileDropArea {
@@ -28,7 +32,7 @@
   background-color: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 3px;
-  padding: .5rem;
+  padding: 0.5rem;
 }
 
 .fileMessage {
