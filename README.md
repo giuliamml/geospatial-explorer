@@ -4,30 +4,53 @@ This is the repo for a web application that allows the users to explore Landsat 
 
 # Getting Started
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Prerequisites
+
+Before you begin, ensure you have the following installed:
+
+Git
+Node.js (which includes npm)
+Yarn
+
+## Clone project
+
+To clone the project using SSH, run the following command:
+
+```sh
+git clone
+git@github.com:giuliamml/geospatial-explorer.git
+```
+
+Alternatively, you can use HTTPS:
+
+```sh
+git clone
+git clone https://github.com/giuliamml/geospatial-explorer.git
+```
 
 ## Install Dependencies
 
-The required dependencies can be installed running the command below:
+Navigate to the project directory and install the required dependencies:
 
 ```sh
 yarn
 ```
 
+
 ## Run The Project
 
-### Available Scripts
-
-In the project directory, you can run:
+### Development Mode:
 
 #### `yarn start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+This runs the app in development mode. Open http://localhost:3000 to view it in your browser. The page will reload if you make edits.
 
+### Running Tests:
 #### `yarn test`
 
 Launches the test runner in the interactive watch mode.
+
+### Building for Production
 
 #### `yarn run build`
 
