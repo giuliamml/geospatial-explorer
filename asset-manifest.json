@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/giuliamml/geospatial-explorer/static/css/main.67d4e16d.css",
+    "main.js": "/giuliamml/geospatial-explorer/static/js/main.3e25b0a4.js",
+    "static/js/787.637148c7.chunk.js": "/giuliamml/geospatial-explorer/static/js/787.637148c7.chunk.js",
+    "static/media/constellr-logo.svg": "/giuliamml/geospatial-explorer/static/media/constellr-logo.1b7a90569e7e0c29275d2b3f6c6dd3f8.svg",
+    "static/media/spritesheet.svg": "/giuliamml/geospatial-explorer/static/media/spritesheet.a4e0eb7ad904a4858361.svg",
+    "index.html": "/giuliamml/geospatial-explorer/index.html",
+    "main.67d4e16d.css.map": "/giuliamml/geospatial-explorer/static/css/main.67d4e16d.css.map",
+    "main.3e25b0a4.js.map": "/giuliamml/geospatial-explorer/static/js/main.3e25b0a4.js.map",
+    "787.637148c7.chunk.js.map": "/giuliamml/geospatial-explorer/static/js/787.637148c7.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.67d4e16d.css",
+    "static/js/main.3e25b0a4.js"
+  ]
+}
