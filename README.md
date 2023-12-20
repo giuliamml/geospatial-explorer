@@ -1,6 +1,6 @@
 # Geospatial Data Explorer
 
-This is the repo for a web application that allows the users to explore Landsat data.
+A web application that allows the users to explore Landsat data.
 
 # Getting Started
 
@@ -8,23 +8,21 @@ This is the repo for a web application that allows the users to explore Landsat 
 
 Before you begin, ensure you have the following installed:
 
-Git
-Node.js (which includes npm)
-Yarn
+1. Git
+2. Node.js (which includes npm)
+3. Yarn
 
 ## Clone project
 
 To clone the project using SSH, run the following command:
 
 ```sh
-git clone
-git@github.com:giuliamml/geospatial-explorer.git
+git clone git@github.com:giuliamml/geospatial-explorer.git
 ```
 
 Alternatively, you can use HTTPS:
 
 ```sh
-git clone
 git clone https://github.com/giuliamml/geospatial-explorer.git
 ```
 

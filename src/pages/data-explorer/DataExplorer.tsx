@@ -47,7 +47,7 @@ const DataExplorer = () => {
       bbox: bbox && bbox.toString(),
       datetime: `${dates[0]}/${dates[1]}`,
       collections: ["landsat-c2l1", "landsat-c2l2-st"],
-      limit: 50,
+      limit: 200,
     });
   };
 
@@ -63,15 +63,20 @@ const DataExplorer = () => {
   return (
     <Container className={styles.container}>
       <Row>
-        <Col sm={9}>
-          <FileUploader setBbox={setBbox} setGeoJsonData={setGeoJsonData} />
+        <h1>Search geospatial data</h1>
+      </Row>
+      <Row>
+        <FileUploader setBbox={setBbox} setGeoJsonData={setGeoJsonData} />
+      </Row>
+      <Row>
+        <Col sm={9} className={styles.conlumn}>
           <MapWithDraw
             setBbox={setBbox}
             geoJsonData={geoJsonData}
             bbox={bbox as Feature["bbox"]}
           />
         </Col>
-        <Col sm={3}>
+        <Col sm={3} className={styles.conlumn}>
           <Form
             handleClick={(event: React.MouseEvent<HTMLButtonElement>) =>
               handleClick(event)
@@ -83,7 +88,9 @@ const DataExplorer = () => {
         </Col>
       </Row>
 
-      <div ref={resultsTableRef}>{data && <TabsSection data={data} />}</div>
+      <div ref={resultsTableRef} className={styles.tabsSection}>
+        {data && <TabsSection data={data} />}
+      </div>
     </Container>
   );
 };

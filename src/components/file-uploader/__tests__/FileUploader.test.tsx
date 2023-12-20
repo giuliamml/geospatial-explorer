@@ -12,6 +12,4 @@ describe("<FileUploader />", () => {
     );
     expect(getByText("Drag and drop file here")).toBeInTheDocument();
   });
-
-  //TODO test file upload?
 });

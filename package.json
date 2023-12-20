@@ -2,6 +2,15 @@
   "name": "geospatial-data-explorer",
   "version": "0.1.0",
   "private": true,
+  "author": "Giulia Mummolo <mail@giuliamummolo.com>",
+  "license": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
   "dependencies": {
     "@types/leaflet": "^1.9.8",
     "@types/react-datepicker": "^4.19.4",
@@ -36,12 +45,6 @@
     "typescript": "^5.3.3",
     "web-vitals": "^2.1.4"
   },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
   "eslintConfig": {
     "extends": [
       "react-app",
@@ -59,8 +62,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "main": "index.js",
-  "author": "Giulia Mummolo <mail@giuliamummolo.com>",
-  "license": ""
+  }
 }

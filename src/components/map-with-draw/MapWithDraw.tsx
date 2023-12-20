@@ -1,16 +1,15 @@
-import React, { useRef } from "react";
+import { useRef, useEffect } from "react";
 import { MapContainer, TileLayer, FeatureGroup } from "react-leaflet";
-import L, { LatLngBounds, LatLngBoundsExpression, Layer, Map } from "leaflet";
+import L, { LatLngBounds, Layer, Map } from "leaflet";
 import { EditControl } from "react-leaflet-draw";
 import "leaflet/dist/leaflet.css";
 import "leaflet-draw/dist/leaflet.draw.css";
-import { useEffect } from "react";
 import { Feature, FeatureCollection } from "../../types/types";
 
 type PropTypes = {
   setBbox: (bounds: number[]) => void;
   bbox: Feature["bbox"];
-  geoJsonData: FeatureCollection | GeoJSON.GeoJsonObject | null;
+  geoJsonData?: FeatureCollection | GeoJSON.GeoJsonObject | null;
 };
 
 const MapWithDraw = ({ setBbox, bbox, geoJsonData }: PropTypes) => {
@@ -29,15 +28,15 @@ const MapWithDraw = ({ setBbox, bbox, geoJsonData }: PropTypes) => {
   };
 
   useEffect(() => {
+    // Handle the geoJSON data
     if (mapRef.current && geoJsonData) {
       const map = mapRef.current;
       const geoJsonLayer = L.geoJSON(
         geoJsonData as unknown as GeoJSON.GeoJsonObject
       );
       geoJsonLayer.addTo(map);
-      // TODO: fix recenter after geoJson upload?
-      // const bounds: LatLngBoundsExpression = ([bbox[1], bbox[0]], 12);
       if (bbox) {
+        console.log(bbox, "bbox");
         map.flyTo([bbox[1], bbox[0]], 4);
       }
     }
@@ -47,7 +46,7 @@ const MapWithDraw = ({ setBbox, bbox, geoJsonData }: PropTypes) => {
     <MapContainer
       ref={mapRef}
       center={[51.505, -0.09]}
-      zoom={13}
+      zoom={2}
       style={{ height: "500px" }}
     >
       <TileLayer

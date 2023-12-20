@@ -109,7 +109,7 @@ describe("<TabsSection />", () => {
   it("should render the tabs component with data", () => {
     render(<TabsSection data={mockData} />);
 
-    expect(screen.getByText("Data Results")).toBeInTheDocument();
+    expect(screen.getByText("Data")).toBeInTheDocument();
     expect(screen.getByText("Analytics")).toBeInTheDocument();
   });
 

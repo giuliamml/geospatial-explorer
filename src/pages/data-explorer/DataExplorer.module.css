@@ -2,5 +2,7 @@
   margin-block: 3rem;
   display: flex;
   flex-direction: column;
-  gap: 5rem;
+}
+.tabsSection {
+  padding-block: 3rem;
 }

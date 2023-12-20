@@ -1,7 +1,5 @@
 .fileUploaderWrapper {
   background-color: var(--tertiary-color);
-  /* margin-block: 1rem; */
-  /* border-radius: 10px; */
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   display: flex;
@@ -10,7 +8,7 @@
   font-size: 0.75rem;
   color: var(--font-color);
   width: 30rem;
-  transform: translateY(5px);
+  transform: translate(11px, 5px);
 }
 
 .fileDropArea {
@@ -36,12 +34,11 @@
 }
 
 .fileMessage {
-  font-size: small;
   font-weight: 300;
-  line-height: 1.4;
   white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  text-align: left;
+  display: block;
+  margin-block: 0.3rem;
 }
 
 .fileInput {

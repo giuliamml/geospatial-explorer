@@ -18,7 +18,7 @@ const RangeDatePicker = ({ handleOnChange, startDate, endDate }: PropTypes) => {
         onChange={handleOnChange}
         isClearable
         className="form-control"
-        dateFormat="dd/MM/yyyy"
+        dateFormat="yyyy/MM/dd"
       />
     </>
   );

@@ -1,7 +1,7 @@
-import Button from "../button/Button";
-import Stack from "react-bootstrap/Stack";
-import RangeDatePicker from "../range-date-picker/RangeDatePicker";
 import moment from "moment";
+import Stack from "react-bootstrap/Stack";
+import Button from "../button/Button";
+import RangeDatePicker from "../range-date-picker/RangeDatePicker";
 
 type Dates = [string, string] | [null, null];
 
@@ -26,8 +26,9 @@ const Form = ({ handleClick, setDates, dates }: PropTypes) => {
   console.log("dates", dates);
 
   return (
-    <Stack gap={3} direction="vertical" style={{ paddingTop: "5rem" }}>
+    <Stack gap={3} direction="vertical">
       <RangeDatePicker
+        //@ts-expect-error
         handleOnChange={handleOnChange}
         startDate={dates[0] ? new Date(dates[0]) : null}
         endDate={dates[1] ? new Date(dates[1]) : null}

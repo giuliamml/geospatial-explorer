@@ -1,5 +1,5 @@
-import styles from "./FileUploader.module.css";
 import { useState } from "react";
+import styles from "./FileUploader.module.css";
 import { Feature, FeatureCollection } from "../../types/types";
 
 type PropTypes = {
@@ -27,9 +27,10 @@ const UploadIcon = () => (
 );
 
 const FileUploader = ({ setBbox, setGeoJsonData }: PropTypes) => {
-  const [fileDisplayText, setFileDisplayText] = useState(
-    "Drag and drop file here"
-  );
+  const [fileDisplayText, setFileDisplayText] = useState({
+    heading: "Drag and drop file here",
+    subHeading: "Limit 10MB per file • JSON",
+  });
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     console.log(event);
@@ -38,7 +39,6 @@ const FileUploader = ({ setBbox, setGeoJsonData }: PropTypes) => {
 
       if (file) {
         const fileName = file.name;
-        setFileDisplayText(fileName);
 
         console.log(fileName);
 
@@ -48,18 +48,18 @@ const FileUploader = ({ setBbox, setGeoJsonData }: PropTypes) => {
           const text = e.target?.result;
           try {
             const geoJson = JSON.parse(text as string);
-            console.log(geoJson);
             if (geoJson && geoJson.type === "FeatureCollection") {
+              setFileDisplayText({ heading: fileName, subHeading: "" });
               setGeoJsonData(geoJson);
 
-              // Assuming the GeoJSON follows the standard format
-              // TODO: handle error if not valid geoJSON
               const calculatedBbox = calculateBbox(geoJson);
               console.log("Bbox coordinates:", calculatedBbox);
               setBbox(calculatedBbox);
+            } else {
+              alert("The uploaded JSON file it is not a GeoJSON.");
             }
           } catch (error) {
-            console.error("Error parsing the file:", error);
+            alert(`Error parsing the file: ${error}`);
           }
         };
 
@@ -74,13 +74,13 @@ const FileUploader = ({ setBbox, setGeoJsonData }: PropTypes) => {
       return geoJson.bbox;
     }
 
-    let lats: number[] = [],
+    const lats: number[] = [],
       lngs: number[] = [];
     geoJson.features.forEach((feature: Feature) => {
       const coords = feature?.geometry?.coordinates[0];
-      coords?.forEach((coord) => {
-        lngs.push(coord[0]);
-        lats.push(coord[1]);
+      coords?.forEach(([coordLong, coordLat]) => {
+        lngs.push(coordLong);
+        lats.push(coordLat);
       });
     });
 
@@ -93,20 +93,31 @@ const FileUploader = ({ setBbox, setGeoJsonData }: PropTypes) => {
   };
 
   return (
-    <div className={styles.fileUploaderWrapper}>
-      <UploadIcon />
-      <div className={styles.fileDropArea}>
-        <span className={styles.fileMessage}>{fileDisplayText}</span>
-        <span className={styles.chooseFileButton}>Browse files</span>
-        <input
-          className={styles.fileInput}
-          type="file"
-          aria-label="file-upload"
-          multiple
-          onChange={handleFileChange}
-        />
+    <>
+      <p>Upload GeoJSON or draw a polygon on the map.</p>
+      <div className={styles.fileUploaderWrapper}>
+        <UploadIcon />
+        <div className={styles.fileDropArea}>
+          <div>
+            <span className={styles.fileMessage}>
+              {fileDisplayText.heading}
+            </span>
+            <span className={styles.fileMessage}>
+              {fileDisplayText.subHeading}
+            </span>
+          </div>
+
+          <span className={styles.chooseFileButton}>Browse files</span>
+          <input
+            className={styles.fileInput}
+            type="file"
+            aria-label="file-upload"
+            multiple
+            onChange={handleFileChange}
+          />
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

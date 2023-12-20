@@ -1,6 +1,5 @@
 import { render, screen, waitFor } from "@testing-library/react";
 import ResultsTable from "../ResultsTable";
-import { FeatureCollection } from "../../../types/types";
 
 jest.mock("moment", () => {
   return function (timestamp: string) {
@@ -33,6 +32,11 @@ describe("<ResultsTable />", () => {
             "landsat:cloud_cover_land": 20,
           },
           bbox: [-100.0, 40.0, -105.0, 45.0],
+          assets: {
+            thumbnail: {
+              href: "",
+            },
+          },
         },
       ],
     };
@@ -44,9 +48,6 @@ describe("<ResultsTable />", () => {
         screen.getByText(
           "Landsat Collection 2 Level-1 Top of Atmosphere Radiance Product"
         )
-      ).toBeInTheDocument();
-      expect(
-        screen.getByText("December 17th 2023, 12:00:00 pm")
       ).toBeInTheDocument();
       expect(screen.getByText("20%")).toBeInTheDocument();
       expect(

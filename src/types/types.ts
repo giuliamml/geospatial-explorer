@@ -78,6 +78,3 @@ type Link = {
   title?: string;
   method?: string;
 };
-
-
-type Dates = [string, string] | [null, null];

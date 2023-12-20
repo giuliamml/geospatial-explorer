@@ -16,7 +16,7 @@ describe("<RangeDatePicker />", () => {
     const datePicker = screen.getByRole("textbox");
     expect(datePicker).toBeInTheDocument();
 
-    fireEvent.change(datePicker, { target: { value: "17/12/2023" } });
+    fireEvent.change(datePicker, { target: { value: "2023/12/17" } });
 
     expect(mockHandleOnChange).toHaveBeenCalledTimes(1);
   });

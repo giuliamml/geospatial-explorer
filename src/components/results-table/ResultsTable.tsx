@@ -1,109 +1,107 @@
+import { useState } from "react";
 import { AgGridReact } from "ag-grid-react";
+import {
+  ColDef,
+  GroupCellRendererParams,
+  ITooltipParams,
+  ValueFormatterParams,
+} from "ag-grid-community";
 import "ag-grid-community/styles/ag-grid.css";
-import moment from "moment";
 import "ag-grid-community/styles/ag-theme-quartz.css";
-import { ColDef, ValueFormatterParams } from "ag-grid-community";
-import { FeatureCollection } from "../../types/types";
-import { ListGroup } from "react-bootstrap";
+import { Feature, FeatureCollection } from "../../types/types";
+import ModalElement from "../modal-element/ModalElement";
+import formatBbox from "../../utils/formatBbox";
+import { formatDate, formatTime } from "../../utils/formatDateTime";
 
 type PropTypes = {
   data: FeatureCollection;
 };
 
+const InfoIcon = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      x="0px"
+      y="0px"
+      width="20"
+      height="20"
+      viewBox="0 0 50 50"
+      fill="grey"
+    >
+      <path d="M 25 2 C 12.309295 2 2 12.309295 2 25 C 2 37.690705 12.309295 48 25 48 C 37.690705 48 48 37.690705 48 25 C 48 12.309295 37.690705 2 25 2 z M 25 4 C 36.609824 4 46 13.390176 46 25 C 46 36.609824 36.609824 46 25 46 C 13.390176 46 4 36.609824 4 25 C 4 13.390176 13.390176 4 25 4 z M 25 11 A 3 3 0 0 0 22 14 A 3 3 0 0 0 25 17 A 3 3 0 0 0 28 14 A 3 3 0 0 0 25 11 z M 21 21 L 21 23 L 22 23 L 23 23 L 23 36 L 22 36 L 21 36 L 21 38 L 22 38 L 23 38 L 27 38 L 28 38 L 29 38 L 29 36 L 28 36 L 27 36 L 27 21 L 26 21 L 22 21 L 21 21 z"></path>
+    </svg>
+  );
+};
+
 const ResultsTable = ({ data }: PropTypes) => {
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [modalData, setModalData] = useState<Feature | null>(null);
+
+  const makeCloudCoverageStyle = (params: ValueFormatterParams) => {
+    if (params.value < 50) {
+      return { color: "green" };
+    } else if (params.value >= 50 && params.value <= 80) {
+      return { color: "orange" };
+    } else {
+      return { color: "red" };
+    }
+  };
+
+  const handleButtonClick = (params: GroupCellRendererParams) => {
+    setIsModalOpen(true);
+    setModalData(params.value);
+  };
   const displayProperties: ColDef[] = [
-    { headerName: "Id", field: "id" },
-    { headerName: "Description", field: "description", filter: true },
     {
-      headerName: "Date & Time",
+      headerName: "Id",
+      field: "id",
+      tooltipField: "id",
+    },
+    {
+      headerName: "Description",
+      field: "description",
+      filter: true,
+      tooltipField: "description",
+    },
+    {
+      headerName: "Date",
       field: "datetime",
       valueFormatter: (params: ValueFormatterParams) =>
-        formatDateTime(params.value),
+        formatDate(params.value),
+    },
+    {
+      headerName: "Time",
+      field: "datetime",
+      valueFormatter: (params: ValueFormatterParams) =>
+        formatTime(params.value),
     },
     {
       headerName: "Bounding Box",
       field: "bbox",
-      tooltipField: "longText",
       valueFormatter: (params: ValueFormatterParams) =>
         formatBbox(params.value),
+      tooltipValueGetter: (params: ITooltipParams) => formatBbox(params.value),
     },
     {
       headerName: "Cloud Coverage",
       field: "cloudCoverage",
       valueFormatter: (params: ValueFormatterParams) => `${params.value}%`,
+      tooltipValueGetter: (params: ITooltipParams) => `${params.value}%`,
+      cellStyle: makeCloudCoverageStyle,
     },
-    // {
-    //   headerName: "Spectral Bands",
-    //   field: "spectralBands",
-    //   cellRenderer: (params: ValueFormatterParams) =>
-    //     renderSpectralBands(params.data.assets),
-    //   tooltipField: "spectralBandsTooltip",
-    // },
-    // {
-    //   headerName: "Thumbnail",
-    //   field: "thumbnail",
-    //   cellRenderer: "linkCellRenderer",
-    // },
-    // {
-    //   headerName: "Metadata",
-    //   field: "metadataLinks",
-    //   cellRenderer: (params) => renderMetadataLinks(params.value),
-    //   cellRenderer: "linkCellRenderer",
-    // },
+    {
+      headerName: "",
+      field: "feature",
+      cellRenderer: (params: GroupCellRendererParams) => (
+        <button
+          style={{ border: "none", backgroundColor: "transparent" }}
+          onClick={() => handleButtonClick(params)}
+        >
+          <InfoIcon />
+        </button>
+      ),
+    },
   ];
-
-  const LinkCellRenderer = ({ value }) => {
-    console.debug(value, "value");
-    // Check if the value is an object and has a href property
-    if (value && typeof value === "object" && value.href) {
-      return (
-        <a href={value.href} target="_blank" rel="noopener noreferrer">
-          {value.href}
-        </a>
-      );
-    }
-
-    // Handle other cases as needed
-    return null;
-  };
-
-  const gridOptions = {
-    // ... other grid options ...
-
-    frameworkComponents: {
-      linkCellRenderer: LinkCellRenderer,
-    },
-
-    // ... other grid options ...
-  };
-
-  const formatDateTime = (isoDateString: string) => {
-    console.log("Received date string:", isoDateString);
-    const date = moment(isoDateString);
-    console.log("Parsed date:", date);
-    return date.isValid()
-      ? date.format("MMMM Do YYYY, h:mm:ss a")
-      : "Invalid Date";
-  };
-
-  const formatBbox = (bboxArray: number[]) => {
-    return bboxArray
-      ? `SW: ${bboxArray[1]}, ${bboxArray[0]} - NE: ${bboxArray[3]}, ${bboxArray[2]}`
-      : "Invalid Bbox";
-  };
-
-  const renderSpectralBands = (assets) => {
-    // Logic to display spectral bands
-  };
-
-  // const renderThumbnail = (thumbnailObj) => {
-  //   const { href } = thumbnailObj;
-  //   return (
-  //     <a href={href} target="_blank">
-  //       <img src={href} style={{ width: "50px", height: "auto" }} />
-  //     </a>
-  //   );
-  // };
 
   const rowData = data.features.map((feature) => ({
     id: feature.id,
@@ -111,28 +109,30 @@ const ResultsTable = ({ data }: PropTypes) => {
     datetime: feature.properties.datetime,
     bbox: feature.bbox,
     cloudCoverage: feature.properties["landsat:cloud_cover_land"],
-    // spectralBands: feature.assets, // Assuming assets contain spectral bands
-    // thumbnail: feature.assets.thumbnail,
-    // metadataLinks: feature.assets["MTL.json"],
+    thumbnail: feature.assets.thumbnail.href,
+    feature: feature,
   }));
 
   return (
-    <div
-      className={"ag-theme-quartz-dark"}
-      style={{ height: 400, width: "100%", textAlign: "left" }}
-      aria-label="table"
-    >
-      <h2>Data results</h2>
-      <AgGridReact
-        aria-label="table"
-        columnDefs={displayProperties}
-        rowData={rowData}
-        domLayout="autoHeight"
-        pagination={true}
-        paginationPageSize={20}
-        gridOptions={gridOptions}
-      />
-    </div>
+    <>
+      <div className={"ag-theme-quartz"} aria-label="table">
+        <AgGridReact
+          aria-label="table"
+          columnDefs={displayProperties}
+          rowData={rowData}
+          domLayout="autoHeight"
+          pagination={true}
+          paginationPageSize={20}
+        />
+      </div>
+      {isModalOpen && (
+        <ModalElement
+          isModalOpen={isModalOpen}
+          setIsModalOpen={setIsModalOpen}
+          data={modalData as Feature}
+        />
+      )}
+    </>
   );
 };
 
