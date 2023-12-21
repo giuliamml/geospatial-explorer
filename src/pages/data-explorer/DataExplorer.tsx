@@ -46,7 +46,6 @@ const DataExplorer = () => {
       bbox: bbox && bbox.toString(),
       datetime: `${dates[0]}/${dates[1]}`,
       collections: ["landsat-c2l1", "landsat-c2l2-st"],
-      limit: 200,
     });
   };
 

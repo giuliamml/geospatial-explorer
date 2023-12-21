@@ -121,8 +121,6 @@ const ResultsTable = ({ data }: PropTypes) => {
           columnDefs={displayProperties}
           rowData={rowData}
           domLayout="autoHeight"
-          pagination={true}
-          paginationPageSize={20}
         />
       </div>
       {isModalOpen && (

@@ -2,7 +2,8 @@ import Modal from "react-bootstrap/Modal";
 import { Feature } from "../../types/types";
 import formatBbox from "../../utils/formatBbox";
 import { formatDate, formatTime } from "../../utils/formatDateTime";
-// import MapWithDraw from "../map-with-draw/MapWithDraw";
+import { MapContainer, Rectangle, TileLayer } from "react-leaflet";
+import { LatLngBoundsExpression, LatLngTuple } from "leaflet";
 
 type PropTypes = {
   isModalOpen: boolean;
@@ -68,14 +69,27 @@ const ModalElement = ({ isModalOpen, setIsModalOpen, data }: PropTypes) => {
       ));
   };
 
+  const center: LatLngTuple = [
+    (bbox[1] + bbox[3]) / 2,
+    (bbox[0] + bbox[2]) / 2,
+  ];
+
+  const convertBboxToBounds = (bbox: number[]) => {
+    if (bbox.length === 4) {
+      const southWest: [number, number] = [bbox[1], bbox[0]];
+      const northEast: [number, number] = [bbox[3], bbox[2]];
+
+      return [southWest, northEast] as LatLngBoundsExpression;
+    }
+    throw new Error("Invalid bounding box data");
+  };
+
+  const bounds = convertBboxToBounds(bbox);
+
   const spectralBands = extractSpectralBands(assets);
   return (
     <>
-      <Modal
-        style={{ maxWidth: "50rem !important", width: "50vw !important" }}
-        show={isModalOpen}
-        onHide={handleClose}
-      >
+      <Modal show={isModalOpen} onHide={handleClose}>
         <Modal.Header closeButton></Modal.Header>
         <Modal.Body>
           <div>
@@ -108,7 +122,15 @@ const ModalElement = ({ isModalOpen, setIsModalOpen, data }: PropTypes) => {
           <div>
             <h3>Location</h3>
             <p>{formatBbox(bbox)}</p>
-            {/* <MapWithDraw bbox={bbox} /> */}
+            <MapContainer center={center} zoom={6} style={{ height: "500px" }}>
+              <TileLayer
+                url="https://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}"
+                maxZoom={20}
+                subdomains={["mt1", "mt2", "mt3"]}
+              />
+
+              <Rectangle bounds={bounds} color="blue" />
+            </MapContainer>
           </div>
           <div>
             <h3>Assets</h3>
