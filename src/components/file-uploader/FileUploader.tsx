@@ -33,14 +33,11 @@ const FileUploader = ({ setBbox, setGeoJsonData }: PropTypes) => {
   });
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(event);
     if (event.target.files) {
       const file = event.target.files[0];
 
       if (file) {
         const fileName = file.name;
-
-        console.log(fileName);
 
         const reader = new FileReader();
 
@@ -53,7 +50,6 @@ const FileUploader = ({ setBbox, setGeoJsonData }: PropTypes) => {
               setGeoJsonData(geoJson);
 
               const calculatedBbox = calculateBbox(geoJson);
-              console.log("Bbox coordinates:", calculatedBbox);
               setBbox(calculatedBbox);
             } else {
               alert("The uploaded JSON file it is not a GeoJSON.");

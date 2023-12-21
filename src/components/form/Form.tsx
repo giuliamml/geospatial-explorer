@@ -23,8 +23,6 @@ const Form = ({ handleClick, setDates, dates }: PropTypes) => {
     }
   };
 
-  console.log("dates", dates);
-
   return (
     <Stack gap={3} direction="vertical">
       <RangeDatePicker

@@ -30,7 +30,6 @@ const DataExplorer = () => {
   // INITIALIZE HOOK INSTANCE
   const { data, loading, error, fetchData } = useFetchData();
 
-  console.log(data);
   const resultsTableRef = useRef<HTMLDivElement | null>(null);
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {

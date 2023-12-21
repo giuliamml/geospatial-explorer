@@ -36,7 +36,6 @@ const MapWithDraw = ({ setBbox, bbox, geoJsonData }: PropTypes) => {
       );
       geoJsonLayer.addTo(map);
       if (bbox) {
-        console.log(bbox, "bbox");
         map.flyTo([bbox[1], bbox[0]], 4);
       }
     }
